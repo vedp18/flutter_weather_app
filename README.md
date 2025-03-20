@@ -10,8 +10,10 @@ A simple yet functional Flutter-based weather application that fetches and displ
 - **Dark Theme UI**: Modern and visually appealing dark theme.
 
 ## Tech Stack
+
 - **Flutter**: Cross-platform UI development.
 - **Dart**: Programming language for Flutter.
+- **BLoC (Business Logic Component)**: State management pattern implemented using the `flutter_bloc` package.
 - **OpenWeatherMap API**: Fetches real-time weather data.
 - **HTTP Package**: For API requests.
 - **intl Package**: For date and time formatting.
@@ -19,7 +21,7 @@ A simple yet functional Flutter-based weather application that fetches and displ
 ## Setup & Installation
 1. Clone the repository:
    ```sh
-   git clone https://github.com/yourusername/weather-app.git
+   git clone https://github.com/vedp18/flutter_weather_app.git
    ```
 2. Navigate to the project directory:
    ```sh
@@ -38,20 +40,37 @@ A simple yet functional Flutter-based weather application that fetches and displ
    flutter run
    ```
 
-## Project Structure
+
+The project follows the BLoC architecture, organized as:
+
 ```
 lib/
-│── main.dart                 # Entry point of the app
-│── weather_screen.dart       # Main UI and logic for fetching weather data
-│── additional_information.dart # Widget to display additional weather details
-│── hourly_forecasting_data.dart # Widget to display hourly weather forecast
+├── bloc/
+│   └── weather_bloc.dart
+|   └── weather_event.dart
+|   └── weather_state.dart
+├── data/
+|   ├── data_provider/
+|   |   └── weather_data_provider.dart
+|   └── repository/
+|       └── weather_repository.dart
+├── models/
+│   └── weather_model.dart
+├── ui/
+│   ├── screens/
+│   │   └── weather_screen.dart
+│   └── widgets/
+│       ├── additional_information.dart
+│       └── hourly_forecasting_data.dart
+├── app_bloc_observer.dart
+└── main.dart
 ```
 
 ## API Usage
 - The app fetches weather data using OpenWeatherMap API with the city name parameter.
 - API Endpoint used:
   ```
-  http://api.openweathermap.org/data/2.5/forecast?q=Dhansura,in&APPID=API_KEY
+  http://api.openweathermap.org/data/2.5/forecast?q=cityName,in&APPID=weatherAPI
   ```
 
 ## Screenshots
