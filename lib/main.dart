@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_weather_app/weather_screen.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_weather_app/app_bloc_observer.dart';
+import 'package:flutter_weather_app/bloc/weather_bloc.dart';
+import 'package:flutter_weather_app/data/data_provider/weather_data_provider.dart';
+import 'package:flutter_weather_app/data/repository/weather_repository.dart';
+import 'package:flutter_weather_app/ui/screens/weather_screen.dart';
 
 void main() {
+
+  Bloc.observer = AppBlocObserver();
   runApp(const WeatherApp());
 }
-
 
 class WeatherApp extends StatefulWidget {
   const WeatherApp({super.key});
@@ -16,10 +22,17 @@ class WeatherApp extends StatefulWidget {
 class _WeatherAppState extends State<WeatherApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark(useMaterial3: true),
-      home: WeatherScreen(),
+    return RepositoryProvider(
+      create: (context) => WeatherRepository(WeatherDataProvider()),
+      child: BlocProvider(
+        // either use RepositoryProvider.of(context).read<WeatherRepository>() or below used one
+        create: (context) => WeatherBloc(context.read<WeatherRepository>()),
+        child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData.dark(useMaterial3: true),
+          home: WeatherScreen(),
+        ),
+      ),
     );
   }
 }
