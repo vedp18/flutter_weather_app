@@ -10,10 +10,10 @@ class WeatherRepository {
   WeatherRepository(this.weatherDataProvider);
 
   
-  Future<WeatherModel> getCurrentWeatherData() async {
+  Future<WeatherModel> getCurrentWeatherData(int cityId) async {
     try {
-      String cityName = "Dhansura";
-      final weatherData = await weatherDataProvider.getCurrentWeatherData(cityName);
+      // String cityName = "Dhansura";
+      final weatherData = await weatherDataProvider.getCurrentWeatherData(cityId);
 
       final data = jsonDecode(weatherData);
       if (data['cod'] != '200') {
