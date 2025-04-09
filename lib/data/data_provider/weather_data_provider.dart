@@ -11,7 +11,7 @@ class WeatherDataProvider {
     print('WeatherDataProvided');
      return response.body;
     } catch (e) {
-      print("erroe in data_provideer");
+      print("error in data_provideer");
       throw e.toString();
     }
   }
